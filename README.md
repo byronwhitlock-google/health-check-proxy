@@ -24,7 +24,7 @@ Make sure you have access to a cloud storage bucket, cloud functions and stackdr
 ### Create uptime check policy
  - Go to stackdriver alerting
  - Create an uptime check
- - Use the trigger url from step one
+ - Use the `httpsTrigger` url from step one
  - under "advanced options" add "403" to the 'Response content contains the text' field.
  - This will cause the uptime check to fail if it does not see the 403 response code from the subrequest in the cloud function
  - Add an alerting policy based on this uptime check
