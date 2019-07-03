@@ -4,25 +4,21 @@ This GCP cloud function allows non standard uptime checks to be performed. The s
 
 ## Getting Started
 
-Make sure you have access to a cloud storage bucket, cloud functions and stackdriver alerting and monitoring.
-
-
-### Installing
-
-
 ### Create Cloud Function.
-Clone this repository
-Run the following commands change URL to the url you wish to check.
+ - Clone this repository
+ - Run the following commands change URL to the url you wish to check.
  ```
   gcloud init
   gcloud functions deploy health-check-proxy --runtime python37 --trigger-http --entry-point health_check --set-env-vars=URL=http://google.com
 ```
-Alternatively follow the [instructions] (https://cloud.google.com/functions/docs/quickstart-python) for creating a cloud function. 
+ - This will create a cloud function named "health-check-proxy" 
+ - Copy the value `httpsTrigger` from the response
+ - Alternatively follow the [instructions](https://cloud.google.com/functions/docs/quickstart-python) for creating a cloud function. 
 
 ### Create uptime check policy
  - Go to stackdriver alerting
  - Create an uptime check
- - Use the trigger url from step one
+ - Use the `httpsTrigger` url from step one
  - under "advanced options" add "403" to the 'Response content contains the text' field.
  - This will cause the uptime check to fail if it does not see the 403 response code from the subrequest in the cloud function
  - Add an alerting policy based on this uptime check
