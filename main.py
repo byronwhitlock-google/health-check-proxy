@@ -2,7 +2,7 @@ def health_check(request):
 
 	from urllib.request import Request, urlopen
 	from urllib.error import URLError, HTTPError
-	from google.cloud import storage
+	import os
 
 	# get url from environment    
 	try:  
