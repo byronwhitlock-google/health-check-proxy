@@ -11,8 +11,6 @@ Make sure you have access to a cloud storage bucket, cloud functions and stackdr
 
 Installation involves
   - Create Cloud Function.
-  - Grant IAM permission to cloud function bucket.
-  - Upload config file to GCS.
   - Create Uptime check & Alerting Policy.
 
 Create cloud function
@@ -20,21 +18,8 @@ Create cloud function
 ```
 Follow the [instructions] (https://cloud.google.com/functions/docs/quickstart-python) for creating a cloud function. 
  - Copy the code from this repository, or zip and upload to the console.
+ - Be sure to set the environment variable URL to the actual url to health check
  - Copy the trigger url from the "trigger" tab once the function is created.
-```
-
-Grant IAM permissions
-```
- - Copy the "service account" in the cloud function details.
- - Go to Cloud storage > (select your bucket) > Permissions.
- - Add the service account as a Cloud Storage Reader. 
-```
-
-Upload Config file To GCS
-```
- - Create a file named "health-check-proxy.txt" locally
- - Add the url you want to health check. 
- - for example http://35.193.169.251/403 will return a 403 and I only want to alert if it is NOT 403
 ```
 
 Create uptime check policy

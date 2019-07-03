@@ -4,19 +4,13 @@ def health_check(request):
 	from urllib.error import URLError, HTTPError
 	from google.cloud import storage
 
-	# load list of urls to check from this bucket
-	#bucket_name = 'my-new-bucket'
-	bucket_name = "bigbuvket-bb"
+	# get url from environment    
+	try:  
+		os.environ["URL"]
+	except KeyError: 
+		return "Environment Variable URL not set"
 
-	# single url
-	file_name = 'health-check-proxy.txt' 
-
-	storage_client = storage.Client()
-
-	bucket = storage_client.get_bucket(bucket_name)
-	blob = bucket.get_blob(file_name)
-	url = blob.download_as_string().decode("utf8").strip()
-
+	url = os.environ['URL']
 	req = Request(url)
 	response_code=-1
 
@@ -28,6 +22,3 @@ def health_check(request):
 
 	print (f'GET on {url} returned {response_code}')
 	return f'{response_code}'
-
-
-
