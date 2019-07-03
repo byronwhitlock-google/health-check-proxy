@@ -4,12 +4,6 @@ This GCP cloud function allows non standard uptime checks to be performed. The s
 
 ## Getting Started
 
-Make sure you have access to a cloud storage bucket, cloud functions and stackdriver alerting and monitoring.
-
-
-### Installing
-
-
 ### Create Cloud Function.
  - Clone this repository
  - Run the following commands change URL to the url you wish to check.
