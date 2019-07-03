@@ -1,6 +1,6 @@
 # Health Check Proxy
 
-This GCP cloud function allows non standard uptime checks to be performed. The stackdriver uptime check does not allow verification of http error codes. The response must always be 200. This GCP cloud function is should be called by the stackdriver uptime check. It will do a subrequest to a url defined in cloud storage, then print out the http status code of the subrequest. This cloud function should always return 200 itself so it can be checked via response output in stackdriver monitoring.
+This GCP cloud function allows non standard uptime checks to be performed. The stackdriver uptime check does not allow verification of http error codes. The response must always be 200. This GCP cloud function is should be called by the stackdriver uptime check. It will do a subrequest (HTTP GET) to a url defined in cloud storage, then print out the http status code of the subrequest. This cloud function should always return 200 itself so it can be checked via response output in stackdriver monitoring.
 
 ## Getting Started
 
@@ -9,28 +9,24 @@ Make sure you have access to a cloud storage bucket, cloud functions and stackdr
 
 ### Installing
 
-Installation involves
-  - Create Cloud Function.
-  - Create Uptime check & Alerting Policy.
 
-Create cloud function
+### Create Cloud Function.
+Clone this repository
+Run the following commands change URL to the url you wish to check.
+ ```
+  gcloud init
+  gcloud functions deploy health-check-proxy --runtime python37 --trigger-http --entry-point health_check --set-env-vars=URL=http://google.com
+```
+Alternatively follow the [instructions] (https://cloud.google.com/functions/docs/quickstart-python) for creating a cloud function. 
 
-```
-Follow the [instructions] (https://cloud.google.com/functions/docs/quickstart-python) for creating a cloud function. 
- - Copy the code from this repository, or zip and upload to the console.
- - Be sure to set the environment variable URL to the actual url to health check
- - Copy the trigger url from the "trigger" tab once the function is created.
-```
-
-Create uptime check policy
-```
+### Create uptime check policy
  - Go to stackdriver alerting
  - Create an uptime check
  - Use the trigger url from step one
  - under "advanced options" add "403" to the 'Response content contains the text' field.
  - This will cause the uptime check to fail if it does not see the 403 response code from the subrequest in the cloud function
  - Add an alerting policy based on this uptime check
-```
+
 
 
 ## Copyright
