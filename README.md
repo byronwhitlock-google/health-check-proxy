@@ -17,7 +17,9 @@ Make sure you have access to a cloud storage bucket, cloud functions and stackdr
   gcloud init
   gcloud functions deploy health-check-proxy --runtime python37 --trigger-http --entry-point health_check --set-env-vars=URL=http://google.com
 ```
-Alternatively follow the [instructions](https://cloud.google.com/functions/docs/quickstart-python) for creating a cloud function. 
+ - This will create a cloud function named "health-check-proxy" 
+ - Copy the value `httpsTrigger` from the response
+ - Alternatively follow the [instructions](https://cloud.google.com/functions/docs/quickstart-python) for creating a cloud function. 
 
 ### Create uptime check policy
  - Go to stackdriver alerting
