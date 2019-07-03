@@ -11,8 +11,8 @@ Make sure you have access to a cloud storage bucket, cloud functions and stackdr
 
 
 ### Create Cloud Function.
-Clone this repository
-Run the following commands change URL to the url you wish to check.
+ - Clone this repository
+ - Run the following commands change URL to the url you wish to check.
  ```
   gcloud init
   gcloud functions deploy health-check-proxy --runtime python37 --trigger-http --entry-point health_check --set-env-vars=URL=http://google.com
